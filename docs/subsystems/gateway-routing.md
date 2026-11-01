@@ -1,5 +1,15 @@
 # Gateway routing and fallback
 
+OpenAI's `POST /v1/decisions` (also `/decisions` for clients using the gateway root)
+uses the same signed JSON forwarding path as embeddings and rerank in
+[`embeddings.go`](../../internal/gateway/embeddings.go). Its `model` is a served
+Magpie model ID, for example `openai/gpt-6-luna`; the provider receives its own
+model ID and the remaining input and questions, subject to configured redaction. Answers retain the
+vendor's shape. Gateway authentication, disabled models, calling-key model and
+account restrictions, provider key rotation and usage recording apply. These
+requests are recorded with operation `decisions`. This endpoint is separate from
+System One at `/v1/systemone` and does not select a routing group's classifier.
+
 The gateway is magpie's local LLM endpoint (`127.0.0.1:3425` by default). It
 serves Chat Completions, Responses, Anthropic Messages and Gemini. It finds
 the provider, key or account and model for each request. When the upstream

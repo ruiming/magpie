@@ -16,13 +16,13 @@ import (
 	"github.com/yetone/magpie/internal/usage"
 )
 
-// retrieveTimeout bounds an embeddings or rerank call: a vendor answers
+// retrieveTimeout bounds an embeddings, rerank or decisions call: a vendor answers
 // one in seconds, a long batch in a minute or two.
 const retrieveTimeout = 3 * time.Minute
 
 // retrieve serves the retrieval APIs (#765): POST /v1/embeddings in
 // OpenAI's shape and POST /v1/rerank in the shape Cohere, Jina and Voyage
-// share. Neither is a chat, so neither is translated: the body goes to the
+// share, and OpenAI's POST /v1/decisions. These are not chats, so none is translated: the body goes to the
 // model's provider at its OpenAI-style base + path as the agent sent it,
 // the model id the provider's own, and the vendor's answer comes back as
 // it said it. The call is recorded and its tokens counted like a turn's.
@@ -63,7 +63,7 @@ type retrieval interface {
 	answerType(got string) string
 }
 
-// jsonRetrieval is an embeddings or rerank body: a JSON object.
+// jsonRetrieval is an embeddings, rerank or decisions body: a JSON object.
 type jsonRetrieval struct{ req map[string]json.RawMessage }
 
 func (j *jsonRetrieval) mask(ctx context.Context, w http.ResponseWriter) (http.ResponseWriter, func(), maskHits, string, error) {
