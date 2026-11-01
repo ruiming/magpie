@@ -34,6 +34,7 @@ var readOnlyRefused = []string{
 	"POST /v1/chat/completions", "POST /chat/completions",
 	"POST /v1/responses", "POST /responses", "GET /v1/responses", "GET /responses",
 	"POST /v1/messages", "POST /messages", "POST /v1/systemone",
+	"POST /v1/decisions", "POST /decisions",
 	"POST /v1" + AlphaSearchPath, "POST " + AlphaSearchPath, "POST /v1/messages/count_tokens",
 	"POST /v1/images/generations", "POST /images/generations", "POST /v1/images/edits", "POST /images/edits",
 	"POST /v1/embeddings", "POST /embeddings", "POST /v1/rerank", "POST /rerank",
