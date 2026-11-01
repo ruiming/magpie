@@ -25,7 +25,7 @@ func (s *Server) Front() http.Handler {
 // agent or an SDK calls with the gateway as its base URL.
 var clientPrefixes = []string{
 	"/v1", "/v1beta",
-	"/models", "/chat/completions", "/responses", "/messages",
+	"/models", "/chat/completions", "/responses", "/messages", "/decisions",
 	"/images", "/embeddings", "/rerank", "/audio", "/videos",
 	"/muse-code/models", CodexPath, AlphaSearchPath, "/mcp",
 	// the key page (KeyPagePath): a key's holder opens it at the address
