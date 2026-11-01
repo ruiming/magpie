@@ -602,7 +602,10 @@ before its route began (`TestDecisionTriesShareTheClassifierWait`). A gateway ke
 `TestDecisionProviderKeysFailOver`.
 [`embeddings.go`](../../internal/gateway/embeddings.go) relays retrieval
 bodies and options (`serveRetrieval`, under `Provider.OpenAIBase`: a
-plugin's fetch whatever API its chat models are on), and
+plugin's fetch whatever API its chat models are on). Retrieval requests,
+including Decisions, use the provider's configured wire name (`ModelWires`
+and `ModelIDs`) while routing, access checks and usage keep the local model
+id (`TestRetrievalModelWireNames`). And
 [`transcribe.go`](../../internal/gateway/transcribe.go) speech-to-text's
 multipart forms through it as sent, rewriting only the model and a masked
 prompt under the form's own boundary (#2053), and

@@ -239,7 +239,7 @@ func (s *Server) serveRetrieval(w http.ResponseWriter, r *http.Request, path, op
 			s.record(call)
 			return
 		}
-		out, ctype, err := req.forModel(c.model)
+		out, ctype, err := req.forModel(provider.UpstreamName(c.p, c.model))
 		if err != nil {
 			tried(400, err)
 			side.end(c.p, c.model, 400, err, Usage{})
