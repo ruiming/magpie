@@ -18,7 +18,9 @@ func TestRetrievalModelWireNames(t *testing.T) {
 			up := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				var got map[string]json.RawMessage
 				if err := json.NewDecoder(r.Body).Decode(&got); err != nil {
-					t.Fatal(err)
+					t.Error(err)
+					http.Error(w, "invalid JSON", http.StatusBadRequest)
+					return
 				}
 				var model string
 				json.Unmarshal(got["model"], &model)
